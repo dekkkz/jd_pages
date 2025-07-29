@@ -43,35 +43,29 @@ html {
   --border-secondary: #40414f;
 }
 
-/* === Font-face definitioner === */
+/* === Font-face definitioner - Latin Modern === */
 @font-face {
-  font-family: 'CMU Serif';
-  src: url('../fonts/cmunrm.ttf') format('truetype');
+  font-family: 'Latin Modern Roman';
+  src: url('/fonts/latin-modern/lmroman10-regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'CMU Serif';
-  src: url('../fonts/cmunti.ttf') format('truetype');
+  font-family: 'Latin Modern Roman';
+  src: url('/fonts/latin-modern/lmroman10-italic.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
-  font-family: 'CMU Serif';
-  src: url('../fonts/cmunbx.ttf') format('truetype');
+  font-family: 'Latin Modern Roman';
+  src: url('/fonts/latin-modern/lmroman12-bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
-}
-@font-face {
-  font-family: 'CMU Serif';
-  src: url('../fonts/cmunbi.ttf') format('truetype');
-  font-weight: 700;
-  font-style: italic;
 }
 
 /* === Body styling === */
 body {
-  font-family: 'CMU Serif', serif;
+  font-family: 'Latin Modern Roman', 'CMU Serif', serif;
   font-size: 16px !important;   /* Ändra här för grundstorlek */
   line-height: 1.6;
   margin: 0;
@@ -81,6 +75,8 @@ body {
   overflow-x: hidden;
   box-sizing: border-box;
 }
+
+
 
 /* === Code blocks & Inline code === */
 .prompt-text-container pre {
