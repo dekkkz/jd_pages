@@ -1,0 +1,8 @@
+{
+    "snippets": [
+        { "trigger": "inf", "expansion": "\\infty |", "mode": "fast", "scope": "math" },
+        { "trigger": "int", "expansion": "\\int_{||}^{||} ||", "mode": "slow", "scope": "math" },
+        { "trigger": "dd", "expansion": "\\frac{d||}{d||} ||", "mode": "fast", "scope": "math" },
+        { "trigger": "lim", "expansion": "\\lim_{|| \\to ||} ||", "mode": "fast", "scope": "math" }
+    ]
+}

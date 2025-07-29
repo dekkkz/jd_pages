@@ -1,0 +1,5 @@
+{
+    "snippets": [
+        { "trigger": "ip", "expansion": "\\left\\langle | \\right\\rangle", "mode": "fast", "scope": "math" }
+    ]
+}
