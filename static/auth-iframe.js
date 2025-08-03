@@ -11,7 +11,7 @@ window.addEventListener('message', function(event) {
 // Lägg till Authorization-header för media-requests
 const originalFetch = window.fetch;
 window.fetch = function(url, options = {}) {
-  if (url.includes('/media/') && authToken) {
+  if ((url.includes('/media/') || url.includes('/iframe-media/')) && authToken) {
     options.headers = {
       ...options.headers,
       'Authorization': 'Bearer ' + authToken

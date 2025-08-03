@@ -1,5 +1,0 @@
-{
-    "snippets": [
-        { "trigger": "par", "expansion": "\\left( | \\right)", "mode": "fast", "scope": "math" }
-    ]
-}

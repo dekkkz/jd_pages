@@ -12,8 +12,58 @@ const katexOpts = {
   strict: "ignore"
 };
 
-// Inget tema-hantering behövs
+// -------------------------------------------------------------
+// Bild-pipeline i iframe
+// -------------------------------------------------------------
+// 1) Alla <img> har först src = 1×1 GIF + data-orig="<url>"
+// 2) När bilden kommer i viewport skickar vi "request-img" till parent
+// 3) Parent svarar med "img-blob" och vi byter src till ObjectURL
+// -------------------------------------------------------------
 
+const PLACEHOLDER_SRC = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+
+// Observera bilder och begär blobar vid behov
+const imgObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const img = entry.target;
+    const orig = img.getAttribute('data-orig');
+    if (orig) {
+      window.parent.postMessage({ type: 'request-img', url: orig }, '*');
+      imgObserver.unobserve(img);
+    }
+  });
+}, { rootMargin: '200px' });
+
+function interceptImageLoading() {
+  const images = document.querySelectorAll('img[data-orig]');
+  images.forEach((img, index) => {
+    // Ensure placeholder src
+    img.src = PLACEHOLDER_SRC;
+    img.style.opacity = '1';
+    img.style.transition = 'opacity 0.3s ease-in-out';
+    imgObserver.observe(img);
+  });
+}
+
+// Hantera meddelanden från parent (html + blob)
+window.addEventListener('message', (event) => {
+  if (event.data?.type === 'html') {
+    updateContent(event.data.payload, event.data.mode, event.data.resetScroll);
+    return;
+  }
+  if (event.data?.type === 'img-blob') {
+    const { orig, blob } = event.data;
+    const objUrl = URL.createObjectURL(blob);
+    document.querySelectorAll(`img[data-orig="${orig}"]`).forEach((img) => {
+      img.src = objUrl;
+      img.removeAttribute('data-orig');
+      img.onload = () => URL.revokeObjectURL(objUrl);
+    });
+  }
+});
+
+// -------------------------------------------------------------
 // Knapp-event-hantering
 function attachButtonHandlers(root) {
   const addButtons = root.querySelectorAll('.add-btn-1, .add-btn-2, .remove-btn, .edit-btn');
@@ -37,11 +87,13 @@ function attachButtonHandlers(root) {
 }
 
 // HTML-uppdatering via postMessage
-function updateContent(html, mode = 'list') {
+function updateContent(html, mode = 'list', resetScroll = false) {
   const root = document.getElementById('content');
   if (root) {
     // Omedelbar uppdatering utan fade-effekter
     root.innerHTML = html;
+    // Reset scroll if parent says so
+    if (resetScroll) window.scrollTo(0, 0);
     
     // Rendera matematik med KaTeX
     if (window.renderMathInElement) {
@@ -58,15 +110,11 @@ function updateContent(html, mode = 'list') {
         detailsElement.open = true;
       }
     }
+
+    // Intercept & observera bilder efter HTML-uppdatering
+    interceptImageLoading();
   }
 }
-
-// Lyssna på postMessage från parent
-window.addEventListener('message', (event) => {
-  if (event.data?.type === 'html') {
-    updateContent(event.data.payload, event.data.mode);
-  }
-});
 
 // Vänta på att DOM är redo innan vi skickar iframe-ready
 document.addEventListener('DOMContentLoaded', () => {

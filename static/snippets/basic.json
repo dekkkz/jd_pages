@@ -59,6 +59,12 @@
       "expansion": "^3",
       "scope": "math",
       "mode": "fast"
+    },
+    {
+      "trigger": "deg",
+      "expansion": "^{\\circ}|",
+      "scope": "math",
+      "mode": "fast"
     }
   ]
 }

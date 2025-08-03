@@ -221,7 +221,8 @@ body {
   position: absolute;
   top: 8px;
   right: 12px;
-  font-size: 11px;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   color: var(--accent-primary);
   background: var(--bg-panel);
@@ -269,11 +270,15 @@ body {
 
 /* === Roboto elements (problemid, ownerid, heatmap, knappar, flaggor) === */
 .problem-card-container .problem-id,
-.problem-card-container .owner-id,
+.problem-card-container .owner-id {
+  font-size: 12px;
+  font-family: 'Roboto', monospace;
+}
+
 .problem-card-container .heatmap,
 .problem-card-container .card-controls,
 .problem-card-container .flags {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', monospace;
   font-size: 12px;
 }
 

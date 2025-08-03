@@ -1,5 +1,0 @@
-{
-    "snippets": [
-        { "trigger": "cong", "expansion": "\\cong |", "mode": "fast", "scope": "math" }
-    ]
-}

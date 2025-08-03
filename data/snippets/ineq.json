@@ -1,8 +1,0 @@
-{
-    "snippets": [
-        { "trigger": "leq", "expansion": "\\leq |", "mode": "fast", "scope": "math" },
-        { "trigger": "geq", "expansion": "\\geq |", "mode": "fast", "scope": "math" },
-        { "trigger": ">>", "expansion": "\\gg |", "mode": "fast", "scope": "math" },
-        { "trigger": "<<", "expansion": "\\ll |", "mode": "fast", "scope": "math" }
-    ]
-}

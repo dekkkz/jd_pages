@@ -1,6 +1,0 @@
-{
-    "snippets": [
-        { "trigger": "mk", "expansion": "$|$", "mode": "slow", "scope": "text" },
-        { "trigger": "dm", "expansion": "\\[ | \\]", "mode": "slow", "scope": "text" }
-    ]
-}

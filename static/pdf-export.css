@@ -1,0 +1,282 @@
+/* =======================
+   FONT-FACE & GRUNDLAYOUT
+========================== */
+@font-face {
+  font-family: 'Latin Modern Roman';
+  src: url('./fonts/latin-modern/lmroman10-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Latin Modern Roman';
+  src: url('./fonts/latin-modern/lmroman10-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Latin Modern Roman';
+  src: url('./fonts/latin-modern/lmroman12-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Latin Modern Roman', 'CMU Serif', serif;
+  font-size: 10px;
+  line-height: 1.15;
+  margin: 0;
+  padding: 10px;
+  background: white;
+  color: black;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* ==================
+   KATEX OVERRIDES
+==================== */
+.katex,
+.katex-display,
+.assessment-details .katex,
+.assessment-details .katex-display,
+.preview-container .katex,
+.preview-container .katex-display {
+  font-size: 1em !important;
+}
+
+/* ==================
+   PROBLEM LAYOUT
+==================== */
+.prompt-wrapper {
+  display: flex;
+  gap: 24px;
+  width: 95%;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.problem-number-container {
+  flex: 0 0 20px;
+  max-width: 20px;
+  margin-left: 20px;
+  display: flex;
+  align-items: baseline;
+}
+
+.prompt-text-container {
+  flex: 1;
+  width: 95%;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.controls-container {
+  flex: 0 0 10%;
+  max-width: 10%;
+  min-width: 0;
+}
+
+.problem-number {
+  font-weight: bold;
+  font-size: 1em;
+  color: black;
+}
+
+/* ==================
+   CODE BLOCKS
+==================== */
+.prompt-text-container pre {
+  background-color: var(--bg-secondary);
+  border: 1px solid gray;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 8px 0;
+  overflow-x: auto;
+  font-family: 'Iosevka', 'Monaco', 'Menlo', monospace;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.prompt-text-container pre code,
+.prompt-text-container code {
+  background: none;
+  padding: 0;
+  border: none;
+  color: #374151;
+}
+
+.prompt-text-container code {
+  background-color: #f7f7f8;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 2px 6px;
+  margin: 0 2px;
+  font-family: 'Roboto Mono', 'Monaco', 'Menlo', monospace;
+  font-size: 8px;
+}
+
+/* ==================
+   TABLES
+==================== */
+.prompt-text-container table {
+  border-collapse: collapse;
+  margin: 1rem auto;
+  max-width: 100%;
+}
+.prompt-text-container th,
+.prompt-text-container td {
+  border: 1px solid gray;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+/* ==================
+   IMAGES
+==================== */
+.prompt-text-container img {
+  display: block;
+  margin: 8px auto;
+  max-width: 75%;
+  max-height: 15vh;
+  height: auto;
+  width: auto;
+}
+
+/* ==================
+   LISTS
+==================== */
+.prompt-text-container ul,
+.prompt-text-container ol {
+  margin: 8px 0 8px 20px;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.prompt-text-container ul {
+  list-style-type: disc;
+  color: var(--text-primary);
+}
+.prompt-text-container ul li::marker {
+  color: var(--text-secondary);
+}
+
+.prompt-text-container ol:not(.alpha-list) {
+  list-style-type: decimal;
+}
+.prompt-text-container ol:not(.alpha-list) li::marker {
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.prompt-text-container ol.alpha-list {
+  list-style-type: lower-alpha;
+}
+.prompt-text-container ol.alpha-list li::marker {
+  content: "(" counter(list-item, lower-alpha) ") ";
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+/* ===========================
+   BEDÖMNINGSDEL & METADATA
+============================= */
+.assessment-section {
+  margin-top: 40px;
+  page-break-before: always;
+}
+
+.assessment-title {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.assessment-details {
+  border: none !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+.problem-assessment-group {
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+
+.problem-assessment-header {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.assessment-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.assessment-prefix {
+  font-weight: bold;
+}
+
+/* ==========================
+   SIDA / UTSKRIFT
+========================== */
+
+@page {
+  size: A4;
+  margin: 25mm 15mm 25mm 15mm;
+}
+
+.print-separator {
+  page-break-before: always;
+  text-align: left;
+  margin: 40px 10px 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #374151;
+}
+
+.print-separator:first-child {
+  page-break-before: auto;
+}
+
+.prompts-section {
+  display: block;
+}
+
+.problem-prompt {
+  page-break-inside: avoid;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* === layoutstrategi för 3 per sida === */
+.problem-prompt:nth-child(42n):not(:first-child) {
+  page-break-before: always;
+}
+
+/* ==========================
+   TIGHTA PAR
+========================== */
+.prefix-container {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  gap: 0.25rem;
+}
+
+/* ==========================
+   PRINT-ONLY OVERRIDES
+========================== */
+@media print {
+  h1, h2, h3 {
+    color: black;
+    margin: 10px 0;
+  }
+}
