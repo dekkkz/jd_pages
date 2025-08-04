@@ -93,8 +93,6 @@ body {
   padding: 12px;
   margin: 8px 0;
   overflow-x: auto;
-  font-family: 'Iosevka', 'Monaco', 'Menlo', monospace;
-  font-size: 10px;
   line-height: 1.6;
 }
 
@@ -113,7 +111,7 @@ body {
   padding: 2px 6px;
   margin: 0 2px;
   font-family: 'Roboto Mono', 'Monaco', 'Menlo', monospace;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 /* ==================
@@ -137,8 +135,8 @@ body {
 .prompt-text-container img {
   display: block;
   margin: 8px auto;
-  max-width: 75%;
-  max-height: 15vh;
+  max-width: 80%;
+  max-height: 20vh;
   height: auto;
   width: auto;
 }
