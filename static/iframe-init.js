@@ -12,14 +12,6 @@ const katexOpts = {
   strict: "ignore"
 };
 
-// -------------------------------------------------------------
-// Bild-pipeline i iframe
-// -------------------------------------------------------------
-// 1) Alla <img> har först src = 1×1 GIF + data-orig="<url>"
-// 2) När bilden kommer i viewport skickar vi "request-img" till parent
-// 3) Parent svarar med "img-blob" och vi byter src till ObjectURL
-// -------------------------------------------------------------
-
 const PLACEHOLDER_SRC = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
 // Observera bilder och begär blobar vid behov
