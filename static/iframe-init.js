@@ -14,23 +14,46 @@ const katexOpts = {
 
 const PLACEHOLDER_SRC = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
+// Cache: original backend-URL -> objectURL
+const blobUrlMap = new Map();
+
 // Observera bilder och begär blobar vid behov
 const imgObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     const img = entry.target;
     const orig = img.getAttribute('data-orig');
-    if (orig) {
+    if (!orig) return;
+    // För blob: eller data: litar vi på parent att skicka img-blob direkt
+    if (/^https?:/i.test(orig)) {
       window.parent.postMessage({ type: 'request-img', url: orig }, '*');
-      imgObserver.unobserve(img);
     }
+    imgObserver.unobserve(img);
   });
 }, { rootMargin: '200px' });
 
 function interceptImageLoading() {
   const images = document.querySelectorAll('img[data-orig]');
-  images.forEach((img, index) => {
-    // Ensure placeholder src
+  images.forEach((img) => {
+    const orig = img.getAttribute('data-orig');
+    if (!orig) return;
+
+    // 1) Om orig är data:URI kan vi sätta den direkt
+    if (orig.startsWith('data:')) {
+      img.src = orig;
+      img.removeAttribute('data-orig');
+      return;
+    }
+
+    // 2) Har vi redan en objectURL cachead?
+    const cachedUrl = blobUrlMap.get(orig);
+    if (cachedUrl) {
+      img.src = cachedUrl;
+      img.removeAttribute('data-orig');
+      return;
+    }
+
+    // 3) Annars placeholder och observer för http/https
     img.src = PLACEHOLDER_SRC;
     img.style.opacity = '1';
     img.style.transition = 'opacity 0.3s ease-in-out';
@@ -46,12 +69,21 @@ window.addEventListener('message', (event) => {
   }
   if (event.data?.type === 'img-blob') {
     const { orig, blob } = event.data;
-    const objUrl = URL.createObjectURL(blob);
+    let objUrl = blobUrlMap.get(orig);
+    if (!objUrl) {
+      objUrl = URL.createObjectURL(blob);
+      blobUrlMap.set(orig, objUrl);
+    }
     document.querySelectorAll(`img[data-orig="${orig}"]`).forEach((img) => {
       img.src = objUrl;
       img.removeAttribute('data-orig');
-      img.onload = () => URL.revokeObjectURL(objUrl);
     });
+    return;
+  }
+  if (event.data?.type === 'clear-blobs') {
+    blobUrlMap.forEach((url) => URL.revokeObjectURL(url));
+    blobUrlMap.clear();
+    return;
   }
 });
 

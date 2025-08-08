@@ -25,7 +25,7 @@ body {
   font-size: 12px;
   line-height: 1.15;
   margin: 0;
-  padding: 10px;
+  padding: 0px;
   background: white;
   color: black;
   overflow-x: hidden;
@@ -52,6 +52,7 @@ body {
   gap: 24px;
   width: 95%;
   margin-bottom: 30px;
+  align-items: baseline;
   box-sizing: border-box;
 }
 
@@ -60,12 +61,11 @@ body {
   max-width: 20px;
   margin-left: 20px;
   display: flex;
-  align-items: baseline;
 }
 
 .prompt-text-container {
   flex: 1;
-  width: 95%;
+  width: 90%;
   min-width: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -79,8 +79,10 @@ body {
 
 .problem-number {
   font-weight: bold;
-  font-size: 1em;
+  font-size: 12px;
   color: black;
+  line-height: 1.15;
+  align-items: baseline;
 }
 
 /* ==================
