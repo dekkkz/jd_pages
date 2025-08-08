@@ -46,19 +46,19 @@ html {
 /* === Font-face definitioner - Latin Modern === */
 @font-face {
   font-family: 'Latin Modern Roman';
-  src: url('/fonts/latin-modern/lmroman10-regular.otf') format('opentype');
+  src: url('../fonts/latin-modern/lmroman10-regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'Latin Modern Roman';
-  src: url('/fonts/latin-modern/lmroman10-italic.otf') format('opentype');
+  src: url('../fonts/latin-modern/lmroman10-italic.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
   font-family: 'Latin Modern Roman';
-  src: url('/fonts/latin-modern/lmroman12-bold.otf') format('opentype');
+  src: url('../fonts/latin-modern/lmroman12-bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
@@ -66,7 +66,7 @@ html {
 /* === Body styling === */
 body {
   font-family: 'Latin Modern Roman', 'CMU Serif', serif;
-  font-size: 15px !important;   /* Ändra här för grundstorlek */
+  font-size: 14px !important;   /* Ändra här för grundstorlek */
   line-height: 1.6;
   margin: 0;
   padding: 10px;
